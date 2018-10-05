@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Deportivo La Marca</title>
+    <style>
+        .loading path {
+            fill: none;
+            stroke: #e8e8e8;
+            stroke-width: 1px;
+            stroke-dasharray: 100px;
+            stroke-dashoffset: 100px;
+            -webkit-animation-name: animacionCircuito;
+            animation-name: animacionCircuito;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-direction: normal;
+            animation-direction: normal;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+        }
+
+        @-webkit-keyframes animacionCircuito {
+            to {
+                stroke-dashoffset: 0
+            }
+        }
+
+        @keyframes animacionCircuito {
+            to {
+                stroke-dashoffset: 0
+            }
+        }
+
+    </style>
+</head>
+<body class="wrapper">
+<noscript>
+    You need to enable JavaScript to run this app.
+</noscript>
+<div id="app">
+    <!-- <div class="col-xs-12" style="text-align: center; margin: auto; height: 100vh">
+        <div class="col-xs-12" style="text-align: center; margin: auto; margin-top: 30vh;">
+            <svg class="loading" width="30vw" viewBox="0 0 24 24" xml:space="preserve" style="max-width:150px">
+                <g>
+                    <path d="M6.513,23.395c-2.838,0-3.596-6.242-3.596-9.93c0-0.75-0.356-1.73-0.735-2.768c-0.822-2.259-1.847-5.069-0.063-7.67
+                        c1.134-1.652,2.36-2.422,3.861-2.422c0.971,0,1.908,0.313,2.901,0.646C9.866,1.58,10.885,1.92,11.928,1.92
+                        c1.06,0,2.073-0.333,3.053-0.656c0.978-0.322,1.901-0.626,2.868-0.626c1.499,0,2.759,0.755,3.965,2.378
+                        c1.87,2.515,0.847,5.397,0.024,7.715c-0.367,1.033-0.713,2.01-0.713,2.734c0,1.651-0.174,9.887-3.597,9.887
+                        c-2.365,0-2.92-2.447-3.408-4.605c-0.497-2.194-0.888-3.526-2.115-3.526c-1.411,0-1.909,1.875-2.437,3.861
+                        C9.006,21.201,8.423,23.395,6.513,23.395z M5.979,1.406
+
+                        "/>
+                </g>
+            </svg>
+        </div>
+    </div> -->
+</div>
+</body>
+</html>

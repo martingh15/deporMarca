@@ -1,0 +1,128 @@
+/* NAVEGADOR */
+.navegadorPrincipal {
+    background-color:#11116C;
+    border:none;
+}
+
+/* color de fuente del menu */
+.navbar-inverse .navbar-nav > li > a {
+    color:white;
+}
+/* logo menu */
+.imgHorse {
+    height: 70px;
+}
+
+/* espacios entre los links del menu */
+@media (min-width: 769px) {
+    .navbar-nav > li > a {
+            padding-top: 24px;
+            margin-left:30px;
+    }
+}
+
+/* links menu */
+.menuItems a{
+    color:white;
+}
+
+/* links menu hover */
+.menuItems a:hover {
+    color:grey;
+    text-decoration: none;
+}
+/* BOTON AGREGAR JUGADORES Y PARTIDOS */
+.botonAgregar {
+    margin-bottom: 20px;
+}
+/* TABLAS  JUGADORES Y PARTIDOS*/
+/* bordes que rodean la tabla */
+.tablaReact {
+    margin-bottom: 0px;
+    border: 1px solid #11116C;
+    border-radius: 10px;
+}
+
+/* texto del encabezado */
+.tablaReact th {
+    text-align: center;
+    border-right: 1px solid #11116C;
+    background-color: rgba(9,9,174, 0.3);
+}
+
+.tablaReact th:last-child {
+    border-right: none;
+}
+
+/* texto de las filas */
+.tablaReact td {
+    text-align: center;
+    border-right: 1px solid #11116C;
+}
+
+.tablaReact td:last-child {
+    border-right: none; 
+}
+
+/* bordes horizontales entre filas */
+.table > tbody > tr > td {
+    border-top: 1px solid #11116C;
+}
+
+/* borde horizontal grueso de el encabezado de la tabla */
+.table > thead > tr > th {
+    border-bottom: 2px solid #11116C;
+}
+
+.botonEditar {
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 2px;
+}
+
+
+/* PARTIDO ABM */
+.tarjetaBusquedaJugador {
+    height: 200px;
+    border: 1px solid #11116C;
+    border-radius: 20px;
+    text-align: center;
+    padding-top:20px;
+}
+
+.tarjetaBusquedaJugador h4 {
+    margin-bottom: 20px;
+}
+
+.botonAgregarJugadorPartido {
+    margin-top:20px;
+}
+
+/* Autosuggest */
+.nombreJugadorAutosuggest {
+    line-height: 25px;
+    margin-left: 20px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.bodyTarjetaJugador {
+    height: 100px;
+    border-radius:20px;
+    border: 1px solid #11116C;
+    margin-left: 10px;
+}
+
+.bodyTarjetaJugador h4 {
+    text-align: center;
+}
+
+.jugadorAM button {
+    float:right;
+    margin-top: 30px;
+}
+
+/* Login */
+.registro button {
+    margin-top: 20px;
+}

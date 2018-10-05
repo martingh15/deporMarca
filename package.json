@@ -1,0 +1,48 @@
+{
+  "name": "sigu-client",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "raw-loader": "^0.5.1",
+    "react-scripts": "1.0.17"
+  },
+  "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^3.3.7",
+    "es6-promise": "^4.2.2",
+    "file-loader": "^1.1.6",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.22.1",
+    "normalizr": "^3.2.4",
+    "object.assign": "^4.1.0",
+    "react": "^16.2.0",
+    "react-autosuggest": "^9.3.4",
+    "react-bootstrap": "^0.32.0",
+    "react-bootstrap-sweetalert": "^4.2.3",
+    "react-dom": "^16.2.0",
+    "react-dropzone-component": "^3.1.2",
+    "react-image-gallery": "^0.8.7",
+    "react-loading": "^1.0.4",
+    "react-moment": "^0.7.0",
+    "react-quill": "^1.2.6",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scrollchor": "^4.2.1",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-test": "REACT_APP_ENVI=develop react-scripts build",
+    "build-GIO-test": "REACT_APP_ENVI=GIO-develop react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -22,6 +22,15 @@
     }
 }
 
+.navegadorPrincipal .container {
+    margin-right: 0;
+    width: 100%;
+}
+
+.navegadorPrincipal .dropdown-toggle {
+    background-color: #11116c !important;
+}
+
 /* links menu */
 .menuItems a {
     color: white;

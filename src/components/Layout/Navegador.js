@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {NavLink} from "react-router-dom";
 
 import history from "../../history";
@@ -12,11 +12,13 @@ import horse from "../../assets/imgMarca/horse512.png";
 //CSS
 import "../../assets/css/estiloMarca.css";
 
+//Actions
+import {logout} from "../../actions/AuthenticationActions";
+
 class Navegador extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -28,14 +30,17 @@ class Navegador extends Component {
 
     render() {
         const {} = this.state;
+        var usuarioLogueado = 'Martin';
         return (
             <div>
-                <Navbar className="navegadorPrincipal" inverse collapseOnSelect style={{width:"100%"}}>
+                <Navbar className="navegadorPrincipal" inverse collapseOnSelect style={{width: "100%"}}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <img className="imgHorse" src={horse} alt="logo" onClick={() => {history.push("/")}}/>
+                            <img className="imgHorse" src={horse} alt="logo" onClick={() => {
+                                history.push("/")
+                            }}/>
                         </Navbar.Brand>
-                        <Navbar.Toggle />
+                        <Navbar.Toggle/>
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav className="menuItems">
@@ -46,6 +51,11 @@ class Navegador extends Component {
                                 <NavLink to="/partidos">Partidos</NavLink>
                             </NavItem>
                         </Nav>
+                        <Nav pullRight>
+                            <NavDropdown eventKey={3} title={"Bienvenido " + usuarioLogueado} id="basic-nav-dropdown">
+                                <MenuItem eventKey={3.1} onClick={this.props.logout}>Cerrar sesión</MenuItem>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
@@ -54,14 +64,16 @@ class Navegador extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-    };
+    return {};
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        logout: () => {
+            dispatch(logout())
+        }
     }
 };
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps,mapDispatchToProps)(Navegador);
+export default connect(mapStateToProps, mapDispatchToProps)(Navegador);

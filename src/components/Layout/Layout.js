@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Route, Switch} from 'react-router-dom';
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 //Components
 import Navegador from "../../components/Layout/Navegador";
@@ -23,6 +23,25 @@ class Layout extends React.Component {
     }
 
     render() {
+        const PrivateRoute = ({component, ...rest, token}) => ( // eslint-disable-line
+
+            <Route
+                {...rest} render={props => (
+
+                token ? (
+                    React.createElement(component, props)
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/',
+                            state: {from: props.location}, // eslint-disable-line
+                        }}
+                    />
+                )
+            )}
+            />
+        );
+
         return (
             <div>
                 <Navegador/>
@@ -33,8 +52,11 @@ class Layout extends React.Component {
                             <Route path="/registro" exact component={Registro}/>
                             <Route path="/jugadores" exact component={Jugador}/>
                             <Route path="/partidos" component={Partido}/>
-                            <Route path="/jugador/:modo/:id" component={JugadorAM}/>
-                            <Route path="/partido/:modo/:id" component={PartidoAM}/>
+                            {/*<Route path="/jugador/:modo/:nro_camiseta" component={JugadorAM}/>*/}
+                            {/*<Route path="/partido/:modo/:nro_camiseta" component={PartidoAM}/>*/}
+                            <PrivateRoute path="/partido/:modo/:nro_camiseta?" token={this.props.authentication.token} component={PartidoAM}/>
+                            <PrivateRoute path="/jugador/:modo/:nro_camiseta?" token={this.props.authentication.token} component={JugadorAM}/>
+
                         </Switch>
                         <MensajeError/>
                     </div>
@@ -47,12 +69,12 @@ class Layout extends React.Component {
 
 function mapStateToProps(store) {
     return {
+        authentication: store.authentication,
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-    }
+    return {}
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

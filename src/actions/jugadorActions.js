@@ -102,6 +102,100 @@ export function fetchJugadoresIfNeeded() {
     }
 }
 
+//Jugadores
+export const REQUEST_JUGADOR = 'REQUEST_JUGADOR';
+export const RECEIVE_JUGADOR = 'RECEIVE_JUGADOR';
+export const INVALIDATE_JUGADOR = 'INVALIDATE_JUGADOR';
+export const ERROR_JUGADOR = "ERROR_JUGADOR";
+export const RESET_JUGADOR = "RESET_JUGADOR";
+
+//Recuperar jugador
+export function invalidateJugador() {
+    return {
+        type: INVALIDATE_JUGADOR
+    }
+}
+
+function requestJugador() {
+    return {
+        type: REQUEST_JUGADOR,
+    }
+}
+
+function receiveJugador(jugador) {
+    return {
+        type: RECEIVE_JUGADOR,
+        jugador: jugador,
+        receivedAt: Date.now()
+    }
+}
+
+function errorJugador(error) {
+    return {
+        type: ERROR_JUGADOR,
+        error: error,
+    }
+}
+
+export function resetJugador() {
+    return {
+        type: RESET_JUGADOR
+    }
+}
+
+export function fetchJugador(nro_camiseta) {
+    return dispatch => {
+        dispatch(requestJugador());
+        return jugadores.getOne(nro_camiseta)
+            .then(function (response) {
+                if (response.status >= 400) {
+                    return Promise.reject(response);
+                }
+                else {
+                    console.log(response);
+                    var data = response.json();
+                    return data;
+                }
+            })
+            .then(function (data) {
+                dispatch(receiveJugador(data));
+            })
+            .catch(function (error) {
+                switch (error.status) {
+                    case 401:
+                        dispatch(errorJugador(errorMessages.UNAUTHORIZED_TOKEN));
+                        return;
+                    default:
+                        dispatch(errorJugador(errorMessages.GENERAL_ERROR));
+                        return;
+                }
+            });
+    }
+}
+
+function shouldFetchJugador(state, nro_camiseta) {
+    const jugadores = state.jugadores.byId;
+    if (!jugadores) {
+        return true
+    } else if (jugadores.isFetching) {
+        return false
+    } else {
+        return jugadores.didInvalidate;
+    }
+}
+
+export function fetchJugadorIfNeeded(nro_camiseta) {
+    return (dispatch, getState) => {
+        if (shouldFetchJugador(getState(), )) {
+            return dispatch(fetchJugador(nro_camiseta))
+        }
+        else
+            return Promise.resolve();
+    }
+}
+
+
+
 
 
 
@@ -149,13 +243,14 @@ export function createJugador(jugador) {
 export function saveCreateJugador(jugador) {
     return dispatch => {
         dispatch(requestCreateJugador());
-        return jugadores.saveCreate(jugador)
+        return jugadores.saveCreateJugador(jugador)
             .then(function (response) {
 
                 if (response.status >= 400) {
                     return Promise.reject(response);
                 }
                 else {
+                    history.push("/jugadores");
                     return response.json();
                 }
             })
@@ -229,10 +324,10 @@ export function deleteJugador(jugador) {
     }
 }
 
-export function saveDeleteJugador(idJugador) {
+export function saveDeleteJugador(nro_camiseta) {
     return dispatch => {
         dispatch(requestDeleteJugador());
-        return jugadores.saveDelete(idJugador)
+        return jugadores.saveDelete(nro_camiseta)
             .then(function (response) {
                 if (response.status >= 400) {
                     return Promise.reject(response);
@@ -315,15 +410,12 @@ export function saveUpdateJugador(jugador) {
             .then(function (response) {
                 //Refresco token
                 //auth.addToken(response.headers);
-                console.log(response);
                 if (response.status >= 400) {
                     return Promise.reject(response);
                 }
                 else {
                     dispatch(receiveUpdateJugador());
-                    dispatch(invalidateJugadores());
-                    dispatch(fetchJugadoresIfNeeded({id: jugador.id}));
-                    history.push("/configuracion/jugador/");
+                    history.push("/jugadores");
                 }
             })
             .catch(function (error) {

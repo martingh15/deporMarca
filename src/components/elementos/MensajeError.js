@@ -18,8 +18,8 @@ class MensajeError extends React.Component {
         Object.entries(this.props.state).forEach(
             ([key, value]) => {
                 var valuePrev = prevProps.state[key];
-                if (value.create && valuePrev && valuePrev.create && !value.create.isCreating && valuePrev.create.isCreating && value.create.error) {
-                    error = value.create.error;
+                if (value.create && value.create.error.message != valuePrev.create.error.message) {
+                    error = value.create.error.message;
                 }
                 if (value.update && valuePrev && valuePrev.update && !value.update.isUpdating && valuePrev.update.isUpdating && value.update.error) {
                     error = value.update.error;

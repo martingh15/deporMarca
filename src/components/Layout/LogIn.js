@@ -12,6 +12,9 @@ import {changeLogin, login, olvideMiPassword, resetLogin} from "../../actions/Au
 //CSS
 import "../../assets/css/estiloMarca.css";
 
+//Images
+import imagenMarca from "../../assets/imgMarca/fotoEquipo.jpg";
+
 class LogIn extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +44,7 @@ class LogIn extends Component {
         var usuario = {};
         return (
             <div className="login">
-                <Col xs={6} lgOffset={3}>
+                <Col xs={6} lgOffset={3} style={{display: this.props.authentication.token ? "none" : "block"}}>
                     <form onSubmit={(e) => {
                         this.submitLogin(e)
                     }}>
@@ -73,6 +76,9 @@ class LogIn extends Component {
                             </Button>
                         </div>
                     </form>
+                </Col>
+                <Col lg={12} style={{display: this.props.authentication.token ? "block" : "none"}}>
+                    <img src={imagenMarca}/>
                 </Col>
             </div>
         );

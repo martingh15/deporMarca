@@ -90,6 +90,7 @@ export function logout() {
         document.cookie = 'id_token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         dispatch(receiveLogout());
         window.location.reload;
+        history.push("/");
 
 
     };

@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 
-import { Col, Row, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import {Col, Row, FormControl, ControlLabel, Button} from 'react-bootstrap';
 // import {Link} from "react-router-dom";
 
 //CSS
 import "../../assets/css/estiloMarca.css";
 
 //Actions
-import {createJugador, updateJugador, saveUpdateJugador, saveCreateJugador} from "../../actions/jugadorActions";
+import {createJugador, updateJugador, saveUpdateJugador, saveCreateJugador, fetchJugador} from "../../actions/jugadorActions";
 
 //Moment
 var moment = require('moment');
@@ -16,11 +16,13 @@ var moment = require('moment');
 class JugadorAM extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     componentDidMount() {
+        if(this.props.match.params.modo == "edit" && Object.keys(this.props.jugadores.update.activo).length == 0) {
+            this.props.fetchJugador(this.props.match.params.nro_camiseta);
+        }
 
     }
 
@@ -34,7 +36,7 @@ class JugadorAM extends Component {
         var tipoOperacion = this.props.match.params.modo;
         if (tipoOperacion === "new") {
             this.props.createJugador(cambio);
-        } else if(tipoOperacion === "edit") {
+        } else if (tipoOperacion === "edit") {
             this.props.updateJugador(cambio);
         }
     }
@@ -52,7 +54,7 @@ class JugadorAM extends Component {
     render() {
         const {} = this.state;
         var jugador = {};
-        if(this.props.match.params.modo === "edit") {
+        if (this.props.match.params.modo === "edit") {
             jugador = this.props.jugadores.update.activo;
         } else if (this.props.match.params.modo === "new") {
             jugador = this.props.jugadores.create.nuevo;
@@ -61,7 +63,7 @@ class JugadorAM extends Component {
             <div className="jugadorAM">
                 <h2>{(this.props.match.params.modo === "edit" ? "Modificacion" : "Alta") + " de Jugador"}</h2>
                 <br/>
-                <div className="container-fluid contenido" style={{backgroundColor:"white"}}>
+                <div className="container-fluid contenido" style={{backgroundColor: "white"}}>
                     <Col xs={12}>
                         <form onSubmit={(e) => this.submitJugador(e)}>
                             <Row>
@@ -71,8 +73,9 @@ class JugadorAM extends Component {
                                         id="nro_camiseta"
                                         type="number"
                                         placeholder="Numero de Camiseta"
-                                        value = {jugador ? jugador.nro_camiseta : ""}
-                                        onChange = {(e) => this.changeJugador(e)}
+                                        disabled={this.props.match.params.modo == "edit"}
+                                        value={jugador ? jugador.nro_camiseta : ""}
+                                        onChange={(e) => this.changeJugador(e)}
                                     />
                                 </Col>
                                 <Col lg={4}>
@@ -82,17 +85,29 @@ class JugadorAM extends Component {
                                         type="text"
                                         placeholder="Nombre"
                                         value={jugador ? jugador.nombre : ""}
-                                        onChange = {(e) => this.changeJugador(e)}
+                                        onChange={(e) => this.changeJugador(e)}
                                     />
                                 </Col>
+                                <Col lg={4}>
+                                    <ControlLabel>Apodo</ControlLabel>
+                                    <FormControl
+                                        id="apodo"
+                                        type="text"
+                                        placeholder="Apodo"
+                                        value={jugador ? jugador.apodo : ""}
+                                        onChange={(e) => this.changeJugador(e)}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row style={{marginTop: "30px"}}>
                                 <Col lg={4}>
                                     <ControlLabel>Posición</ControlLabel>
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        value = {jugador ? jugador.posicion: ""}
+                                        value={jugador ? jugador.posicion : ""}
                                         id="posicion"
-                                        onChange = {(e) => this.changeJugador(e)}>
+                                        onChange={(e) => this.changeJugador(e)}>
                                         <option value="">Seleccione posición</option>
                                         <option value="Arquero">Arquero</option>
                                         <option value="Defensor">Defensor</option>
@@ -100,19 +115,18 @@ class JugadorAM extends Component {
                                         <option value="Delantero">Delantero</option>
                                     </FormControl>
                                 </Col>
-                            </Row>
-                            <Row>
                                 <Col lg={4}>
-                                <br/>
-                                <ControlLabel>Fecha de Nacimiento</ControlLabel>
+                                    <ControlLabel>Fecha de Nacimiento</ControlLabel>
                                     <FormControl
                                         id="fecha_nacimiento"
                                         type="date"
                                         placeholder="Fecha de Nacimiento"
-                                        value={jugador.fecha_nacimiento ? jugador.fecha_nacimiento  : ""}
-                                        onChange = {(e) => this.changeJugador(e)}
+                                        value={jugador.fecha_nacimiento ? jugador.fecha_nacimiento : ""}
+                                        onChange={(e) => this.changeJugador(e)}
                                     />
                                 </Col>
+                            </Row>
+                            <Row>
                                 <Button bsStyle="primary" bsSize="large" type="submit">
                                     {this.props.match.params.modo == 'edit' ? 'Editar' : 'Agregar'}
                                 </Button>
@@ -143,14 +157,17 @@ const mapDispatchToProps = (dispatch) => {
         createJugador: (jugador) => {
             dispatch(createJugador(jugador))
         },
-        saveUpdateJugador:(jugador) => {
+        saveUpdateJugador: (jugador) => {
             dispatch(saveUpdateJugador(jugador))
         },
-        saveCreateJugador:(jugador) => {
+        saveCreateJugador: (jugador) => {
             dispatch(saveCreateJugador(jugador))
+        },
+        fetchJugador: (jugador) => {
+            dispatch(fetchJugador(jugador))
         },
     }
 };
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps,mapDispatchToProps)(JugadorAM);
+export default connect(mapStateToProps, mapDispatchToProps)(JugadorAM);

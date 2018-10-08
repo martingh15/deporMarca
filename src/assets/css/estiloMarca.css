@@ -42,6 +42,13 @@
     text-decoration: none;
 }
 
+.login img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    max-width: 650px;
+}
 /* BOTON AGREGAR JUGADORES Y PARTIDOS */
 .botonAgregar {
     margin-bottom: 20px;

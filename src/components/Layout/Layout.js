@@ -10,6 +10,7 @@ import JugadorAM from "../../pages/Jugador/JugadorAM";
 import Partido from "../../pages/Partido/Partido";
 import PartidoAM from "../../pages/Partido/PartidoAM";
 import MensajeError from "../elementos/MensajeError";
+import Registro from "../../components/Layout/Registro";
 
 class Layout extends React.Component {
 
@@ -29,6 +30,7 @@ class Layout extends React.Component {
                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 principal">
                         <Switch>
                             <Route path="/" exact component={LogIn}/>
+                            <Route path="/registro" exact component={Registro}/>
                             <Route path="/jugadores" exact component={Jugador}/>
                             <Route path="/partidos" component={Partido}/>
                             <Route path="/jugador/:modo/:id" component={JugadorAM}/>

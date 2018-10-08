@@ -16,7 +16,7 @@ var partidos = {
             },
             dataType: 'json'
         };
-        return fetch(c.BASE_URL + '/partidos', defaultOptions);
+        return fetch(c.BASE_URL + '/allPartidos', defaultOptions);
     },
 
 };

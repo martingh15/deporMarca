@@ -15,13 +15,12 @@ const assign = Object.assign || require('object.assign');
 // The initial application state
 const initialState = {
     usuario: {
-        email: '',
+        nombreUsuario: '',
         password: ''
     },
     currentlySending: false,
     token: auth.loggedIn(),
     errorMessage: null,
-    nombreUsuario: auth.nombreUsuario(),
     idUsuario: auth.idUsuario(),
 };
 
@@ -29,7 +28,6 @@ const initialState = {
 const authentication = (state = initialState, action) => {
     switch (action.type) {
         case CHANGE_LOGIN:
-            console.log(action.usuario);
             return assign({}, state, {
                 usuario: merge({}, state.usuario, action.usuario),
             });
@@ -42,7 +40,7 @@ const authentication = (state = initialState, action) => {
         case REQUEST_LOGIN:
             return assign({}, state, {
                 currentlySending: action.sending,
-                errorMessage: null
+                errorMessage: null,
             });
         case ERROR_LOGIN:
             return assign({}, state, {
@@ -56,20 +54,18 @@ const authentication = (state = initialState, action) => {
             });
         case RESET_LOGIN:
             return assign({}, state, {
-                usuario: {email: '', password: ''},
+                usuario: {nombreUsuario: '', password: ''},
                 currentlySending: false,
                 token: false,
                 errorMessage: null,
-                nombreUsuario: ""
 
             });
         case LOGOUT_SUCCESS:
             return assign({}, state, {
-                usuario: {email: '', password: ''},
+                usuario: {nombreUsuario: '', password: ''},
                 currentlySending: false,
                 token: false,
                 errorMessage: null,
-                nombreUsuario: ""
             });
         default:
             return state;

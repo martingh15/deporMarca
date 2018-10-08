@@ -16,12 +16,11 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 
 export function login(usuario) {
     return (dispatch) => {
-        console.log("login");
         dispatch(sendingRequest(true));
         // If no username or password was specified, throw a field-missing error
         if (anyElementsEmpty(usuario)) {
-            dispatch(errorLogin("Completa los campos"));
             dispatch(sendingRequest(false));
+            dispatch(errorLogin("Completa los campos"));
             return;
         }
         auth.login(usuario, (success, error) => {
@@ -32,12 +31,13 @@ export function login(usuario) {
                 dispatch(receiveLogin(success));
                 //guardo usuario logueado
                 var datos = jwt_decode(localStorage.token);
-                dispatch(changeUser(datos.nombre));
+                dispatch(changeUser(datos.nombreUsuario));
                 // If the login worked, forward the user to the dashboard and clear the form
                 dispatch(changeLogin({
-                    email: "",
+                    nombreUsuario: "",
                     password: ""
                 }));
+                history.push("/jugadores");
             } else {
                 switch (error.status) {
                     case 401:
@@ -134,19 +134,17 @@ function anyElementsEmpty(elements) {
 
 export function olvideMiPassword(usuario) {
     return (dispatch) => {
-        console.log("login");
         dispatch(sendingRequest(true));
         // If no username or password was specified, throw a field-missing error
         if (usuario=="") {
             dispatch(sendingRequest(false));
-            dispatch(errorLogin("Debe ingresar su email para iniciar el proceso de recuperación."));
+            dispatch(errorLogin("Debe ingresar su usuario para iniciar el proceso de recuperación."));
             return;
         }
         auth.olvideMiPassword(usuario, (success, error) => {
             // When the request is finished, hide the loading indicator
             if (success === true) {
                 dispatch(sendingRequest(false));
-                console.log('succes');
             } else {
                 switch (error.status) {
                     case 401:

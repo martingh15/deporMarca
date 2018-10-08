@@ -38,15 +38,14 @@ var auth = {
 
         fetch(c.BASE_URL + '/loginWeb', defaultOptions)
             .then(function(response) {
-                console.log(response);
                 if (response.status >= 400) {
                     //callback(false, response);
                     return Promise.reject(response);
                 }
                 else {
-                    console.log(response);
+
                     var data = response.json();
-                    console.log(data);
+
                     return data;
                 }
             })
@@ -55,7 +54,6 @@ var auth = {
                 callback(true);
             })
             .catch(function (error) {
-                console.log(error);
                 callback(false, error);
             });
     },
@@ -95,7 +93,6 @@ var auth = {
         // If there is a token in the localStorage, the user already is
         // authenticated
         if (this.loggedIn()) {
-            console.log('algo');
             callback(true);
             return;
         }
@@ -108,7 +105,7 @@ var auth = {
                 'Access-Control-Allow-Origin':'*',
                 "Content-Type": "application/json;charset=UTF-8"
             },
-            body: JSON.stringify({email:usuario}),
+            body: JSON.stringify({nombreUsuario:usuario}),
             // cache: false,
             dataType: 'json',
         };
@@ -123,7 +120,6 @@ var auth = {
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 callback(false, error);
             });
     },
@@ -158,7 +154,6 @@ var auth = {
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 callback(false, error);
             });
     },
@@ -193,7 +188,6 @@ var auth = {
                 }
             })
             .catch(function (error) {
-                console.log(error);
                 callback(false, error);
             });
     },

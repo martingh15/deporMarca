@@ -13,10 +13,11 @@ var jugadores = {
                 'Accept': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 "Content-Type": "application/json;charset=UTF-8",
+                "Authorization": "Bearer "+ localStorage.token
             },
             dataType: 'json'
         };
-        return fetch(c.BASE_URL + '/jugadores', defaultOptions);
+        return fetch(c.BASE_URL + '/allJugadores', defaultOptions);
     },
     saveUpdate(jugador) {
         let defaultOptions = {

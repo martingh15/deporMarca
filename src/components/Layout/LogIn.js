@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {Navbar, Nav, NavItem, ControlLabel, FormControl, Col, Button} from 'react-bootstrap';
 import {NavLink} from "react-router-dom";
 
+import history from "../../history";
+
 //Actions
 import {changeLogin, login, olvideMiPassword, resetLogin} from "../../actions/AuthenticationActions";
 
@@ -38,30 +40,38 @@ class LogIn extends Component {
         const {} = this.state;
         var usuario = {};
         return (
-            <div className="registro">
+            <div className="login">
                 <Col xs={6} lgOffset={3}>
                     <form onSubmit={(e) => {
                         this.submitLogin(e)
                     }}>
                         <ControlLabel>Nombre de Usuario</ControlLabel>
                         <FormControl
-                            id="email"
+                            id="nombreUsuario"
                             type="text"
+                            required={true}
                             placeholder="Nombre de usuario"
-                            value={usuario ? usuario.email : ""}
+                            value={usuario ? usuario.nombreUsuario : ""}
                             onChange={(e) => this.onChangeLogin(e)}
                         />
                         <ControlLabel>Contraseña</ControlLabel>
                         <FormControl
                             id="password"
                             type="password"
+                            required={true}
                             placeholder="Contraseña"
                             value={usuario ? usuario.password : ""}
                             onChange={(e) => this.onChangeLogin(e)}
                         />
-                        <Button bsStyle="primary" bsSize="large" type="submit">
-                            Guardar
-                        </Button>
+                        <div className="botonesLogin">
+                            <Button className="entrar" bsStyle="primary" bsSize="large" type="submit">
+                                Entrar
+                            </Button>
+                            <Button className="registrarse" bsStyle="primary" bsSize="large" type="submit"
+                                    onClick={() => history.push('/registro')}>
+                                Registrarse
+                            </Button>
+                        </div>
                     </form>
                 </Col>
             </div>
@@ -83,8 +93,8 @@ const mapDispatchToProps = (dispatch) => {
         login: (usuario) => {
             dispatch(login(usuario))
         },
-        olvideMiPassword: (email) => {
-            dispatch(olvideMiPassword(email))
+        olvideMiPassword: (nombreUsuario) => {
+            dispatch(olvideMiPassword(nombreUsuario))
         },
         resetLogin: () => {
             dispatch(resetLogin())

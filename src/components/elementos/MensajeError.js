@@ -27,6 +27,9 @@ class MensajeError extends React.Component {
                 if (value.delete && valuePrev && valuePrev.delete && !value.delete.isDeleting && valuePrev.delete.isDeleting && value.delete.error) {
                     error = value.delete.error;
                 }
+                if (value.validate && valuePrev && valuePrev.validate && !value.validate.isValidating && valuePrev.validate.isValidating && value.validate.error) {
+                    error = value.validate.error;
+                }
                 //Authentication
                 if (value.errorMessage != valuePrev.errorMessage) {
                     error = value.errorMessage;
@@ -35,8 +38,7 @@ class MensajeError extends React.Component {
         if (this.state.mostrar != (error != null) && error != null && error.length > 0) {
             this.setState({mostrar: true, error: error});
         }
-        console.log(error);
-    }
+}
 
 
     render() {

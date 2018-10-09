@@ -3,6 +3,7 @@ import authentication from "./authentication";
 import jugadores from "./jugadorReducer"
 import partidos from "./partidoReducer";
 import usuarios from "./usuarioReducer";
+import torneos from "./torneoReducer";
 
 
 export default combineReducers({
@@ -10,4 +11,5 @@ export default combineReducers({
     jugadores,
     partidos,
     usuarios,
+    torneos,
 });

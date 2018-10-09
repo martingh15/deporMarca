@@ -11,6 +11,8 @@ import Partido from "../../pages/Partido/Partido";
 import PartidoAM from "../../pages/Partido/PartidoAM";
 import MensajeError from "../elementos/MensajeError";
 import Registro from "../../components/Layout/Registro";
+import Torneos from "../../pages/Torneos/Torneos";
+
 
 class Layout extends React.Component {
 
@@ -20,6 +22,7 @@ class Layout extends React.Component {
     }
 
     componentDidMount() {
+
     }
 
     render() {
@@ -51,6 +54,7 @@ class Layout extends React.Component {
                             <Route path="/" exact component={LogIn}/>
                             <Route path="/registro" exact component={Registro}/>
                             <Route path="/jugadores" exact component={Jugador}/>
+                            <Route path="/torneos" component={Torneos}/>
                             <Route path="/partidos" component={Partido}/>
                             {/*<Route path="/jugador/:modo/:nro_camiseta" component={JugadorAM}/>*/}
                             {/*<Route path="/partido/:modo/:nro_camiseta" component={PartidoAM}/>*/}

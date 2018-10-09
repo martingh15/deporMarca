@@ -48,6 +48,9 @@ class Navegador extends Component {
                                 <NavLink to="/jugadores">Jugadores</NavLink>
                             </NavItem>
                             <NavItem eventKey={2}>
+                                <NavLink to="/torneos">Torneos</NavLink>
+                            </NavItem>
+                            <NavItem eventKey={3}>
                                 <NavLink to="/partidos">Partidos</NavLink>
                             </NavItem>
                         </Nav>

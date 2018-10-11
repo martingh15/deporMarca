@@ -36,8 +36,6 @@ var usuario = {
     },
 
     saveCreate(usuario) {
-        console.log
-
         let defaultOptions = {
             url: '',
             method: 'POST',

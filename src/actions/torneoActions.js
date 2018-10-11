@@ -33,7 +33,7 @@ function requestTorneos() {
 function receiveTorneos(json) {
     return {
         type: RECEIVE_TORNEOS,
-        torneos: normalizeDatos(json),
+        torneos: json,
         receivedAt: Date.now()
     }
 }

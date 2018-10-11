@@ -60,7 +60,6 @@ function fetchJugadores() {
                     return Promise.reject(response);
                 }
                 else {
-                    console.log(response);
                     var data = response.json();
                     return data;
                 }
@@ -152,7 +151,6 @@ export function fetchJugador(nro_camiseta) {
                     return Promise.reject(response);
                 }
                 else {
-                    console.log(response);
                     var data = response.json();
                     return data;
                 }

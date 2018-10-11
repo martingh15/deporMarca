@@ -23,14 +23,11 @@ class MensajeCorrecto extends React.Component {
                 var valuePrev = prevProps.todos[key];
                 if (valuePrev && value && !value.currentlySending && valuePrev.currentlySending && !value.errorMessage && !value.token) {
                     mensajes.push("Operación realizada correctamente.");
-                    console.log("entro");
                     procesoFinalizado = true;
                 }
                 if (value.create && valuePrev && valuePrev.create && !value.create.isCreating && valuePrev.create.isCreating && !value.create.error) {
                     //TODO
-                    console.log("entre aca");
                     mensajes.push("Perfil creado correctamente. Inicie sesión para acceder.");
-                    console.log("entro");
                     procesoFinalizado = true;
                 }
 

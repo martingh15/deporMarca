@@ -70,7 +70,6 @@ class PartidoAM extends Component {
         // } else {
         //     this.props.saveUpdatePartido(this.props.partidos.update.activo);
         // }
-        console.log('guardar partido en la BD');
 
     }
 
@@ -137,7 +136,6 @@ class PartidoAM extends Component {
         } else if (this.props.match.params.modo === "new") {
             partido = this.props.partidos.create.nuevo;
         }
-        console.log(partido);
         var fecha = partido.fecha;
         var Jugadores = [];
         this.props.jugadores.allIds.map((idJugador) => {

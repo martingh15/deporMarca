@@ -49,6 +49,7 @@
     border: none;
     max-width: 650px;
 }
+
 /* BOTON AGREGAR JUGADORES Y PARTIDOS */
 .botonAgregar {
     margin-bottom: 20px;
@@ -157,4 +158,27 @@
 
 .registro label, .registro button {
     margin-top: 20px;
+}
+
+/* TORNEOS */
+.torneos .contenedorTorneo {
+    border: 1px solid #11116C;
+    padding: 10px;
+    width: 400px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 10px;
+}
+
+.torneos .contenedorTorneo:hover {
+    background-color: #11116C;
+    color: white;
+    cursor: pointer;
+}
+
+.torneos .contenedorTorneo:hover th{
+    background-color: white;
+    color: black;
 }

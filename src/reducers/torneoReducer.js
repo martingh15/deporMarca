@@ -8,6 +8,7 @@ import {REQUEST_TORNEOS, RECEIVE_TORNEOS, INVALIDATE_TORNEOS, ERROR_TORNEOS,
     SUCCESS_CREATE_TORNEO, ERROR_CREATE_TORNEO, REQUEST_CREATE_TORNEO, RESET_CREATE_TORNEO,
     UPDATE_TORNEO, REQUEST_UPDATE_TORNEO, SUCCESS_UPDATE_TORNEO, ERROR_UPDATE_TORNEO,
     RESET_UPDATE_TORNEO } from "../actions/torneoActions";
+import normalizeDatos from "../normalizers/normalizeTorneos";
 
 function torneosById(state = {
     isFetching: false,
@@ -30,7 +31,7 @@ function torneosById(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 didInvalidate: false,
-                torneos: merge({}, state.torneos, action.torneos.entities.torneos),
+                torneos: merge({}, state.torneos, normalizeDatos(action.torneos).entities.torneos),
                 total: action.total,
                 lastUpdated: action.receivedAt,
                 error: "",
@@ -56,7 +57,7 @@ function torneosById(state = {
 function allTorneos(state = [], action) {
     switch (action.type) {
         case RECEIVE_TORNEOS:
-            return union(state, action.torneos.result);
+            return union(state, normalizeDatos(action.torneos).result);
         case RESET_TORNEOS:
             return [];
         default:

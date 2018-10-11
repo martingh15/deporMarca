@@ -2,12 +2,16 @@ import {combineReducers} from 'redux';
 import merge from 'lodash/merge';
 import union from 'lodash/union';
 
+import normalizeDatos from "../normalizers/normalizePartidos";
+import normalizeDatosTorneo from "../normalizers/normalizeTorneos";
+
 //Actions
 import {REQUEST_PARTIDOS, RECEIVE_PARTIDOS, INVALIDATE_PARTIDOS, ERROR_PARTIDOS, 
     RESET_PARTIDOS, RESET_UPDATE_PARTIDOS,CREATE_PARTIDO, REQUEST_CREATE_PARTIDOS,
     SUCCESS_CREATE_PARTIDO, ERROR_CREATE_PARTIDO, REQUEST_CREATE_PARTIDO, RESET_CREATE_PARTIDO, 
     UPDATE_PARTIDO, REQUEST_UPDATE_PARTIDO, SUCCESS_UPDATE_PARTIDO, ERROR_UPDATE_PARTIDO, 
     RESET_UPDATE_PARTIDO } from "../actions/partidoActions";
+import {RECEIVE_TORNEOS} from "../actions/torneoActions";
 
 function partidosById(state = {
     isFetching: false,
@@ -47,6 +51,13 @@ function partidosById(state = {
                 partidos: {},
                 error: "",
             });
+        case RECEIVE_TORNEOS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                didInvalidate: false,
+                partidos: merge({}, state.partidos, normalizeDatosTorneo(action.torneos).entities.partidos),
+                lastUpdated: action.receivedAt
+            });
         default:
             return state
     }
@@ -57,6 +68,9 @@ function allPartidos(state = [], action) {
     switch (action.type) {
         case RECEIVE_PARTIDOS:
             return union(state, action.partidos.result);
+        case RECEIVE_TORNEOS:
+            let torneos = normalizeDatosTorneo(action.torneos).entities.partidos;
+            return torneos ? Object.keys(torneos) : [];
         case RESET_PARTIDOS:
             return [];
         default:

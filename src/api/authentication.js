@@ -72,7 +72,6 @@ var auth = {
      * @return {boolean} True if there is a logged in user, false if there isn't
      */
     loggedIn() {
-        console.log('logueado?',!!localStorage.token);
         return !!localStorage.token;
     },
 

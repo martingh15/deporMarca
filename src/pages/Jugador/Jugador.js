@@ -48,13 +48,12 @@ class Jugador extends Component {
         var Jugadores = [];
         this.props.jugadores.allIds.map((idJugador) => {
             var jugador = this.props.jugadores.byId.jugadores[idJugador];
-            console.log(jugador);
             Jugadores.push(
                 <tr key={jugador.nro_camiseta} className="columnaJugadores">
                     <td>{jugador.nro_camiseta}</td>
                     <td>{jugador.nombre}</td>
                     <td>{jugador.posicion}</td>
-                    <td>{jugador.fecha_nacimiento}</td>
+                    <td>{moment(jugador.fecha_nacimiento).format("DD/MM/YYYY")}</td>
                     <td>{jugador.cantidad_asistencias}</td>
                     <td>{jugador.cantidad_goles}</td>
                     <td>

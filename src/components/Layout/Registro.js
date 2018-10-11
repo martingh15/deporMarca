@@ -33,7 +33,6 @@ class Registro extends Component {
                 this.refs.confirmaPass.setCustomValidity("Las contraseñas no coinciden");
             }
             else {
-                console.log("bien");
                 this.refs.confirmaPass.setCustomValidity("");
             }
         }
@@ -42,7 +41,6 @@ class Registro extends Component {
                 this.refs.confirmaPass.setCustomValidity("Las contraseñas no coinciden");
             }
             else {
-                console.log("bien");
                 this.refs.confirmaPass.setCustomValidity("");
             }
         }

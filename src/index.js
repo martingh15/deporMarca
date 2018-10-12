@@ -39,10 +39,10 @@ var createStoreWithMiddleware = null;
 if (process.env.NODE_ENV !== 'production') {
     const loggerMiddleware = createLogger();
     createStoreWithMiddleware = applyMiddleware(thunk, loggerMiddleware)(createStore);
-    console.log("hola estoy en debug")
+    console.log("hola estoy en develop");
 }
 else{
-    console.log("hola estoy en produccion")
+    console.log("hola estoy en produccion");
     createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
     //chau console.los metodo 4 de esta pagina https://stapp.space/how-to-remove-javascript-console-log-pros-2/

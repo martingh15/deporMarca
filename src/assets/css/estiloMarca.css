@@ -178,7 +178,43 @@
     cursor: pointer;
 }
 
-.torneos .contenedorTorneo:hover th{
+.torneos .contenedorTorneo:hover th {
     background-color: white;
     color: black;
+}
+
+/*PARTIDOS*/
+.partidos .contenedorPartidos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.partidos .contenedorPartido {
+    border: 1px solid #11116C;
+    padding: 10px;
+    width: 400px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.partidos .contenedorPartido p {
+    margin-left: 20px;
+}
+
+.partidos .descripcionPartido {
+    float: left;
+}
+
+.partidos .fechaPartido {
+    float: right;
+    margin-right: 20px;
+}
+
+.partido .arqueros {
+
 }

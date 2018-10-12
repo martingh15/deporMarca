@@ -4,11 +4,11 @@ import union from 'lodash/union';
 
 //Actions
 import {REQUEST_TORNEOS, RECEIVE_TORNEOS, INVALIDATE_TORNEOS, ERROR_TORNEOS,
-    RESET_TORNEOS, RESET_UPDATE_TORNEOS,CREATE_TORNEO,
+    RESET_TORNEOS,CREATE_TORNEO,
     SUCCESS_CREATE_TORNEO, ERROR_CREATE_TORNEO, REQUEST_CREATE_TORNEO, RESET_CREATE_TORNEO,
     UPDATE_TORNEO, REQUEST_UPDATE_TORNEO, SUCCESS_UPDATE_TORNEO, ERROR_UPDATE_TORNEO,
-    RESET_UPDATE_TORNEO } from "../actions/torneoActions";
-import normalizeDatos from "../normalizers/normalizeTorneos";
+    RESET_UPDATE_TORNEO, REQUEST_TORNEO, RECEIVE_TORNEO, INVALIDATE_TORNEO, ERROR_TORNEO, RESET_TORNEO } from "../actions/torneoActions";
+import {normalizeDatos, normalizeDato} from "../normalizers/normalizeTorneos";
 
 function torneosById(state = {
     isFetching: false,
@@ -109,6 +109,8 @@ function create(state = {
 
 function update(state = {
     isUpdating: false,
+    isFetchingActivo: false,
+    didInvalidateActivo: true,
     activo: {},
     error: ""
 }, action) {
@@ -140,6 +142,32 @@ function update(state = {
                 isFetching: false,
                 activo: {},
                 error: null
+            });
+        //Fetch torneo activo
+        case REQUEST_TORNEO:
+            return Object.assign({}, state, {
+                isFetchingActivo: true,
+                didInvalidateActivo: false,
+                error: "",
+            });
+        case RECEIVE_TORNEO:
+            return Object.assign({}, state, {
+                isFetchingActivo: false,
+                didInvalidateActivo: false,
+                activo: action.torneo.entities.torneo[action.torneo.result],
+                error: "",
+            });
+        case ERROR_TORNEO:
+            return Object.assign({}, state, {
+                isFetchingActivo: false,
+                didInvalidateActivo: true,
+                error: action.error
+            });
+        case RESET_TORNEO:
+            return Object.assign({}, state, {
+                isFetchingActivo: false,
+                activo: {},
+                error: "",
             });
         default:
             return state

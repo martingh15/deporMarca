@@ -54,8 +54,8 @@ class Layout extends React.Component {
                             <Route path="/" exact component={LogIn}/>
                             <Route path="/registro" exact component={Registro}/>
                             <Route path="/jugadores" exact component={Jugador}/>
+                            <Route path="/torneos/:idTorneo" exact component={Partido}/>
                             <Route path="/torneos" component={Torneos}/>
-                            <Route path="/partidos" component={Partido}/>
                             {/*<Route path="/jugador/:modo/:nro_camiseta" component={JugadorAM}/>*/}
                             {/*<Route path="/partido/:modo/:nro_camiseta" component={PartidoAM}/>*/}
                             <PrivateRoute path="/partido/:modo/:nro_camiseta?" token={this.props.authentication.token} component={PartidoAM}/>

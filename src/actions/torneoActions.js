@@ -3,11 +3,9 @@ import torneos from "../api/torneo";
 
 import history from '../history';
 
-//normalizer
-import normalizeDatos from "../normalizers/normalizeTorneos";
-
 //constants
 import * as errorMessages from '../constants/MessageConstants';
+import {normalizeDato} from "../normalizers/normalizeTorneos";
 
 
 //Torneos
@@ -17,7 +15,7 @@ export const INVALIDATE_TORNEOS = 'INVALIDATE_TORNEOS';
 export const ERROR_TORNEOS = "ERROR_TORNEOS";
 export const RESET_TORNEOS = "RESET_TORNEOS";
 
-//Recuperar torneo
+//Recuperar torneos
 export function invalidateTorneos() {
     return {
         type: INVALIDATE_TORNEOS
@@ -96,9 +94,100 @@ export function fetchTorneosIfNeeded() {
 }
 
 
-export function resetTorneoss() {
+export function resetTorneos() {
     return {
         type: RESET_TORNEOS
+    }
+}
+
+//Torneo
+export const REQUEST_TORNEO = 'REQUEST_TORNEO';
+export const RECEIVE_TORNEO = 'RECEIVE_TORNEO';
+export const INVALIDATE_TORNEO = 'INVALIDATE_TORNEO';
+export const ERROR_TORNEO = "ERROR_TORNEO";
+export const RESET_TORNEO = "RESET_TORNEO";
+
+//Recuperar torneo
+export function invalidateTorneo() {
+    return {
+        type: INVALIDATE_TORNEO
+    }
+}
+
+function requestTorneo() {
+    return {
+        type: REQUEST_TORNEO,
+    }
+}
+
+function receiveTorneo(torneo) {
+    return {
+        type: RECEIVE_TORNEO,
+        torneo: normalizeDato(torneo),
+        receivedAt: Date.now()
+    }
+}
+
+function errorTorneo(error) {
+    return {
+        type: ERROR_TORNEO,
+        error: error,
+    }
+}
+
+export function resetTorneo() {
+    return {
+        type: RESET_TORNEO
+    }
+}
+
+export function fetchTorneo(idTorneo) {
+    return dispatch => {
+        dispatch(requestTorneo());
+        return torneos.getOne(idTorneo)
+            .then(function (response) {
+                if (response.status >= 400) {
+                    return Promise.reject(response);
+                }
+                else {
+                    var data = response.json();
+                    return data;
+                }
+            })
+            .then(function (data) {
+                dispatch(receiveTorneo(data));
+            })
+            .catch(function (error) {
+                switch (error.status) {
+                    case 401:
+                        dispatch(errorTorneo(errorMessages.UNAUTHORIZED_TOKEN));
+                        return;
+                    default:
+                        dispatch(errorTorneo(errorMessages.GENERAL_ERROR));
+                        return;
+                }
+            });
+    }
+}
+
+function shouldFetchTorneo(state, idTorneo) {
+    const torneos = state.torneos.update.activo;
+    if (!torneos) {
+        return true
+    } else if (torneos.isFetching) {
+        return false
+    } else {
+        return torneos.didInvalidate;
+    }
+}
+
+export function fetchTorneoIfNeeded(idTorneo) {
+    return (dispatch, getState) => {
+        if (shouldFetchTorneo(getState(), )) {
+            return dispatch(fetchTorneo(idTorneo))
+        }
+        else
+            return Promise.resolve();
     }
 }
 

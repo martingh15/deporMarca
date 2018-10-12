@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import "../../assets/css/estiloMarca.css";
 
 //Actions
-import {fetchTorneosIfNeeded} from "../../actions/torneoActions";
+import {fetchTorneosIfNeeded, updateTorneo} from "../../actions/torneoActions";
 import history from "../../history";
 
 //Constants
@@ -21,6 +21,8 @@ class Torneos extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this.getPartidos = this.getPartidos.bind(this);
     }
 
     componentDidMount() {
@@ -30,6 +32,10 @@ class Torneos extends Component {
 
     componentWillUnmount() {
     }
+    getPartidos(torneo) {
+        this.props.updateTorneo(torneo);
+        history.push("/torneos/"+torneo.id);
+    }
 
 
     render() {
@@ -38,7 +44,6 @@ class Torneos extends Component {
         var Torneos = [];
         this.props.torneos.allIds.map((idTorneo) => {
             var torneo = this.props.torneos.byId.torneos[idTorneo];
-
 
             var DatosTorneo = [];
             var cantPJ = 0;
@@ -83,7 +88,7 @@ class Torneos extends Component {
             );
 
             Torneos.push(
-                <div className="contenedorTorneo" onClick={()=> history.push("/torneos/"+torneo.id)}>
+                <div className="contenedorTorneo" onClick={()=> this.getPartidos(torneo)}>
                     <p>Fecha: {moment(torneo.fechaTorneo).format("DD/MM/YYYY")}</p>
                     <p>Lugar: {torneo.lugar}</p>
                     <b>{torneo.descripcionTorneo}</b>
@@ -139,6 +144,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchTorneosIfNeeded: () => {
             dispatch(fetchTorneosIfNeeded())
+        },
+        updateTorneo: (torneo) => {
+            dispatch(updateTorneo(torneo))
         },
     }
 };

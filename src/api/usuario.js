@@ -44,7 +44,6 @@ var usuario = {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 "Content-Type": "application/json;charset=UTF-8",
-                "Authorization": "Bearer " + localStorage.token
             },
             // cache: false,
             dataType: 'json',

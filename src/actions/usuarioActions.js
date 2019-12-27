@@ -68,11 +68,12 @@ function saveCreateUsuario() {
                     return response.json();
                 }
             })
-            .then((usuario) => {
+            .then(() => {
                 dispatch(resetCreateUsuario());
-                history.push("/jugadores");
+                history.push("/");
             })
             .catch(function (error) {
+                console.log(error);
                 switch (error.status) {
                     case 401:
                         dispatch(errorCreateUsuario(errorMessages.UNAUTHORIZED_TOKEN));

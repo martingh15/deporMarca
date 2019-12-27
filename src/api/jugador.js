@@ -17,7 +17,7 @@ var jugadores = {
             },
             dataType: 'json'
         };
-        return fetch(c.BASE_URL + '/allJugadores', defaultOptions);
+        return fetch(c.BASE_URL + '/jugadores', defaultOptions);
     },
     saveUpdate(jugador) {
         let defaultOptions = {

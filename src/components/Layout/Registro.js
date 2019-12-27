@@ -33,7 +33,6 @@ class Registro extends Component {
                 this.refs.confirmaPass.setCustomValidity("Las contraseñas no coinciden");
             }
             else {
-                console.log("bien");
                 this.refs.confirmaPass.setCustomValidity("");
             }
         }
@@ -42,13 +41,12 @@ class Registro extends Component {
                 this.refs.confirmaPass.setCustomValidity("Las contraseñas no coinciden");
             }
             else {
-                console.log("bien");
                 this.refs.confirmaPass.setCustomValidity("");
             }
         }
     }
 
-    submitLogin(e) {
+    submitRegistro(e) {
         e.preventDefault();
         this.props.saveUsuarioLogueado();
     }
@@ -60,17 +58,17 @@ class Registro extends Component {
             <div className="registro">
                 <Col xs={6} lgOffset={3}>
                     <form onSubmit={(e) => {
-                        this.submitLogin(e)
+                        this.submitRegistro(e)
                     }}>
                         <h1>Registrate!</h1>
                         <ControlLabel>Nombre de Usuario</ControlLabel>
                         <input
                             className="form-control"
-                            id="nombreUsuario"
+                            id="nombre_usuario"
                             type="text"
                             required={true}
                             placeholder="Nombre de usuario"
-                            value={usuario ? usuario.nombreUsuario : ""}
+                            value={usuario ? usuario.nombre_usuario : ""}
                             onChange={(e) => this.onChangeUsuario(e)}
                         />
                         <ControlLabel>Contraseña</ControlLabel>

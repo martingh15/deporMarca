@@ -20,6 +20,7 @@ class Navegador extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.authentication);
     }
 
 
